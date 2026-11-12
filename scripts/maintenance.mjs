@@ -1,0 +1,13 @@
+import {mkdir,writeFile,appendFile} from 'node:fs/promises';
+const repo=process.env.GITHUB_REPOSITORY;
+if(!repo)throw new Error('Run in GitHub Actions');
+const headers={Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
+if(process.env.GH_TOKEN)headers.Authorization=`Bearer ${process.env.GH_TOKEN}`;
+const response=await fetch(`https://api.github.com/repos/${repo}/actions/runs?per_page=12`,{headers});
+if(!response.ok)throw new Error(`GitHub API ${response.status}`);
+const data=await response.json();
+const lines=['# Monthly maintenance evidence','',`Generated: ${new Date().toISOString()}`,`Repository: ${repo}`,`Source commit: ${process.env.GITHUB_SHA}`,'','Provenance: GitHub Actions runs API. Read-only report; no code changes or commits.','','| Workflow | Status | Conclusion | Evidence |','|---|---|---|---|'];
+for(const run of data.workflow_runs)lines.push(`| ${String(run.name).replaceAll('|','/').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('\n',' ')} | ${run.status} | ${run.conclusion??'pending'} | [Run](${run.html_url}) |`);
+if(!data.workflow_runs.length)lines.push('','No workflow runs returned. This is not evidence of passing checks.');
+lines.push('','Review CI/security failures when capacity allows. Pending is not success. Check Dependabot PRs before merging. No contribution quotas. Reports can be delayed or disabled by GitHub inactivity policies.');
+await mkdir('reports',{recursive:true});const body=lines.join('\n');await writeFile('reports/maintenance.md',body);if(process.env.GITHUB_STEP_SUMMARY)await appendFile(process.env.GITHUB_STEP_SUMMARY,body);

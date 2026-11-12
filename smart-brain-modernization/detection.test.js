@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {validateImageUrl,boxStyle,detectFixture} from './src/detection.js';
+test('rejects insecure and credential URLs',()=>{for(const url of ['http://example.com/a','javascript:alert(1)','https://user:pass@example.com/x','not a url']) assert.throws(()=>validateImageUrl(url));});
+test('bounds scale without negative dimensions',()=>{const style=boxStyle({left:.2,top:.1,right:.7,bottom:.6});assert.equal(style.left,'20%');assert.ok(Math.abs(parseFloat(style.width)-50)<0.001);assert.throws(()=>boxStyle({left:.8,top:0,right:.1,bottom:1}));assert.throws(()=>boxStyle({left:NaN,top:0,right:1,bottom:1}));});
+test('adapter explicitly identifies synthetic source',async()=>{assert.equal((await detectFixture('https://example.com/a')).source,'synthetic fixture');});
+test('abort is honored',async()=>{const c=new AbortController();c.abort();await assert.rejects(detectFixture('https://example.com/a',{signal:c.signal}),{name:'AbortError'});});

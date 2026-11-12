@@ -1,0 +1,9 @@
+# Separate developer portfolio
+
+AI-assisted static portfolio, separate from all existing sites. Source: `index.html` and `style.css`; security headers: `public/_headers`. No trackers, external fonts, API secrets, tenant data or image services.
+
+Use Node 24.22.0 or another version supported by the installed cf package. From this directory, run `npm ci` and `npm --prefix ../smart-brain-modernization ci`, then `npm run check` and `npm run build`. The build prepares the shared theme and licensed fonts, builds the sibling React prototype from source and copies generated assets into the static site. Generated assets are ignored by Git. The Cloudflare Vite plugin writes `.cloudflare/output/v0/`. Run `npm run deploy` to deploy that prebuilt production output using cf. No Wrangler configuration is used.
+
+Theme: dark console palette, curved amber framing, violet/blue accents, persistent directory rail and project cards. Self-hosted Rajdhani headings and IBM Plex Sans body text have accompanying OFL licenses. All four projects link to case studies and real source locations. The Smart-Brain prototype is hosted at `/demos/smart-brain/`; no public .NET API or real Microsoft tenant is exposed.
+
+For local verification, run `node preview.mjs` with normal local-network access. The earlier restricted preview could not be reached by the in-app browser. `/__qa/desktop` and `/__qa/phone` are local-only test frames, rendered at 1440×1000 and 390×844. They are not production routes. The browser's viewport override did not alter its actual panel size, so the test frames provide real responsive document widths instead. Desktop and phone frames rendered correctly with loaded fonts and no horizontal page overflow. Navigation, expandable project details and the synthetic demo's success/error paths were checked through the browser.

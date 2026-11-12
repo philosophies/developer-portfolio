@@ -1,0 +1,19 @@
+{
+  "name": "cody-developer-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node check.mjs",
+    "preview": "node preview.mjs",
+    "build": "node prepare.mjs && cf build",
+    "deploy": "cf deploy --prebuilt --mode production"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^2.0.0-beta.v.15",
+    "cf": "^1.0.0-beta.30",
+    "vite": "^7.3.8"
+  },
+  "engines": {
+    "node": ">=24.22.0"
+  }
+}

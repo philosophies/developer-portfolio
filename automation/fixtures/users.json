@@ -1,0 +1,27 @@
+[
+  {
+    "id": "demo-001",
+    "displayName": "Synthetic Active User",
+    "accountEnabled": true,
+    "licenses": [
+      "demo-license"
+    ],
+    "lastSignIn": "2026-10-25"
+  },
+  {
+    "id": "demo-002",
+    "displayName": "Synthetic Disabled User",
+    "accountEnabled": false,
+    "licenses": [
+      "demo-license"
+    ],
+    "lastSignIn": "2026-07-01"
+  },
+  {
+    "id": "demo-003",
+    "displayName": "Synthetic Unknown User",
+    "accountEnabled": true,
+    "licenses": [],
+    "lastSignIn": null
+  }
+]

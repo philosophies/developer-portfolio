@@ -1,0 +1,12 @@
+import {cp,mkdir} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {execFileSync} from 'node:child_process';
+const root=new URL('./',import.meta.url);
+await mkdir(new URL('./public/fonts/',root),{recursive:true});
+await cp(new URL('./fonts/',root),new URL('./public/fonts/',root),{recursive:true});
+await cp(new URL('./style.css',root),new URL('./public/theme.css',root));
+if(!process.env.npm_execpath)throw new Error('Use npm run build so the same npm runtime is used for the prototype build');
+execFileSync(process.execPath,[process.env.npm_execpath,'--prefix',fileURLToPath(new URL('../smart-brain-modernization/',root)),'run','build'],{stdio:'inherit'});
+await mkdir(new URL('./public/demos/smart-brain/',root),{recursive:true});
+await cp(new URL('../smart-brain-modernization/dist/',root),new URL('./public/demos/smart-brain/',root),{recursive:true});
+console.log('Prepared shared theme, licensed fonts and synthetic prototype from source.');

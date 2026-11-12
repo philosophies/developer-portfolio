@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: local-demo-only
+      POSTGRES_DB: reporting
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["./sql:/docker-entrypoint-initdb.d:ro"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U demo -d reporting"]
+      interval: 2s
+      retries: 15

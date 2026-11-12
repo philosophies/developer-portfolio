@@ -1,0 +1,23 @@
+name: Monthly maintenance report
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '43 14 1 * *'
+permissions:
+  contents: read
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - run: node scripts/maintenance.mjs
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: maintenance-report
+          path: reports/maintenance.md
+          retention-days: 60
