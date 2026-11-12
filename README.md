@@ -2,6 +2,8 @@
 
 SQL, backend and internal-tools development portfolio. Created November 12, 2026 with AI assistance and synthetic data.
 
+**[Open the live portfolio](https://cody-developer-portfolio.jones-cody.workers.dev)** · [Deployment and hosted checks](DEPLOYMENT.md)
+
 Projects: `site/` separate portfolio, `backend/` synthetic reporting API, `automation/` read-only Microsoft 365 review demo, `smart-brain-modernization/` isolated migration prototype. Existing repositories and websites are unchanged.
 
 ## Provenance
