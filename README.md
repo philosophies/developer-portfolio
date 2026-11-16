@@ -21,7 +21,7 @@ project README for implementation limits and setup.
 
 - [Reporting API](backend/README.md): ASP.NET Core / PostgreSQL, authenticated review/correction
   workflow, transactional audit history, schema migrations, 28 HTTP/database integration cases and a
-  reproducible index study.
+  reproducible index study and a ten-check logical recovery rehearsal.
 - [Reporting workbench](reporting-ui/README.md): typed React client, role-aware workflow, audit
   timeline and a credential-free hosted sample.
 - [Access-review tool](automation/README.md): report-only evaluator and a read-only Graph adapter
@@ -32,8 +32,9 @@ project README for implementation limits and setup.
 - [Portfolio](site/README.md): static Cloudflare site with four project case studies and the
   synthetic React demo.
 
-See [maintenance and milestones](REVIEW-AND-MAINTENANCE.md),
-[repository review](REPOSITORY-REVIEW.md), [verification](VERIFICATION.md) and
-[security boundaries](SECURITY.md). Repository: https://github.com/philosophies/developer-portfolio.
-No automated direct pushes or activity-generating commits are included. Dependabot proposes real
-dependency PRs; merges remain manual.
+See [role evidence and remaining practice](SKILL-EVIDENCE.md),
+[maintenance and milestones](REVIEW-AND-MAINTENANCE.md), [repository review](REPOSITORY-REVIEW.md),
+[verification](VERIFICATION.md) and [security boundaries](SECURITY.md). Repository:
+https://github.com/philosophies/developer-portfolio. No automated direct pushes or
+activity-generating commits are included. Dependabot proposes real dependency PRs; merges remain
+manual.

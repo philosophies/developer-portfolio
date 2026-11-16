@@ -70,3 +70,11 @@ provider sign-in are not claimed.
 The public workbench is explicitly a browser-memory simulation. The local build uses the real HTTP
 client. Managed backend hosting and production provider sign-in remain separate steps; no sample is
 presented as a live tenant or production system.
+
+## Logical recovery rehearsal
+
+Ten checks passed locally against PostgreSQL 17 using two disposable synthetic databases: complete
+row fingerprints for three tables, approved aggregates, two identity sequences, append-only audit
+protection, amount validation, audit foreign keys and tenant/external-ID uniqueness. The drill uses
+real pg_dump/pg_restore and runs in backend CI. It does not recover the application migration ledger
+or establish offsite, point-in-time or production recovery behavior.

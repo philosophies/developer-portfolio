@@ -116,14 +116,26 @@
           >Read the SQL study and raw query plans ↗</a
         >
       </p>
+      <h3>Can the data come back?</h3>
+      <p>
+        A repeatable PostgreSQL recovery rehearsal dumps synthetic fixtures and restores them into a
+        fresh disposable database. Ten checks verify complete rows, report totals, identity
+        sequences, audit protections and constraints. CI repeats it; this is logical recovery
+        evidence, not a production disaster-recovery claim.
+      </p>
+      <p>
+        <a href="https://github.com/philosophies/developer-portfolio/tree/main/backend/operations"
+          >Read the recovery drill and its limits ↗</a
+        >
+      </p>
       <h3>Deployment package and remaining work</h3>
       <p>
         A non-root .NET container image is provided. The service includes database readiness checks,
         structured transition logs and explicit migration commands. Production startup requires a
         trusted HTTPS identity provider and audience. A typed React interface now supports the
         workflow, with a real HTTP adapter for local API use and a clearly labeled sample mode on
-        this site. Managed PostgreSQL hosting, production provider sign-in and backup/restore
-        verification remain next steps. The API is not currently exposed publicly.
+        this site. Managed PostgreSQL hosting, production provider sign-in and deployment-specific
+        recovery verification remain next steps. The API is not currently exposed publicly.
       </p>
       <footer>
         <a href="/#work">Return to selected work</a
