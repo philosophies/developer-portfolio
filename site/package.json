@@ -9,7 +9,7 @@
     "deploy": "cf deploy --prebuilt --mode production"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^2.0.0-beta.v.15",
+    "@cloudflare/vite-plugin": "^2.0.0-beta.v.16",
     "cf": "^1.0.0-beta.30",
     "vite": "^7.3.8"
   },
