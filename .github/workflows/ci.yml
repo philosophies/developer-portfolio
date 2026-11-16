@@ -45,6 +45,11 @@ jobs:
           dotnet list backend.tests/Reporting.Tests.csproj package --vulnerable --include-transitive
           --format json > nuget-audit.json
       - run: node scripts/check-nuget.mjs nuget-audit.json
+      - name: Rehearse synthetic database recovery
+        shell: bash
+        run:
+          python3 backend/operations/rehearse_recovery.py --container "${{ job.services.postgres.id
+          }}" | tee recovery-evidence.txt
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
@@ -52,6 +57,7 @@ jobs:
           path: |
             TestResults/
             nuget-audit.json
+            recovery-evidence.txt
           retention-days: 30
   demos:
     runs-on: ubuntu-latest

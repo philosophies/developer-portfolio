@@ -22,10 +22,10 @@ unchanged. The following checklist documents the intended publication and mainte
    licensed private-repository scanning. The initial CI, CodeQL and maintenance-report runs passed;
    see DEPLOYMENT.md.
 6. From `site/`, with supported Node installed: `npm ci`,
-   `npm --prefix ../smart-brain-modernization ci`, `npm run check`, `npm run build`, then
-   `npm run deploy`. Use `cf`; do not add a Wrangler configuration. The deployment command uses the
-   prebuilt production output. The only intended new resource is the named static Worker; no custom
-   domain or existing site route is changed.
+   `npm --prefix ../smart-brain-modernization ci`, `npm --prefix ../reporting-ui ci`,
+   `npm run check`, `npm run build`, then `npm run deploy`. Use `cf`; do not add a Wrangler
+   configuration. The deployment command uses the prebuilt production output. The only intended new
+   resource is the named static Worker; no custom domain or existing site route is changed.
 7. Verify the returned public URL, desktop/mobile layout, links and security headers. Record the
    deployment version and actual URL. Cloudflare preview-only build checks are not proof of a live
    deployment. Roll back using the previous deployment version if needed; leave existing sites
@@ -60,11 +60,12 @@ or expected weekly hours.
 
 ## Next development milestones
 
-- SQL Developer: document query plans with a larger synthetic fixture, compare indexes, add
-  reproducible performance evidence. Avoid invented production-scale claims.
+- SQL Developer: a 100,000-row synthetic query-plan/index study is implemented. Next execute
+  equivalent T-SQL examples on SQL Server; PostgreSQL results do not establish SQL Server behavior.
 - .NET / backend: the authenticated record-review workflow, transactional history and failure-path
   tests are implemented. Next evaluate managed backend hosting and provider sign-in separately from
-  the static site.
+  the static site. A disposable logical recovery drill is implemented; production grants, offsite
+  backups and deployment recovery remain separate.
 - Internal Tools: run the read-only Graph adapter in an authorized test tenant; transport tests
   cover pagination, throttling and permission failures. Keep public fixtures synthetic.
 - Smart-Brain: follow the separately reviewed PR sequence in its README. The current prototype does

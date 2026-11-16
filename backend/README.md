@@ -107,3 +107,10 @@ costs where applicable, test backup/restore and verify the runtime database role
 schema or audit history. The companion reporting workbench provides a typed local API interface and
 a separate public sample mode. Managed identity-provider sign-in and broader operational testing
 remain next steps. No employer data or real tenant exports are included.
+
+## Recovery rehearsal
+
+[Run the disposable database recovery drill](operations/README.md) to check restored fixture rows,
+report totals, identity sequences, audit protections and constraints. Ten checks passed locally
+against PostgreSQL 17. CI repeats the drill and retains its output. This validates logical recovery
+of synthetic fixtures, not production disaster recovery or application migration-ledger recovery.
