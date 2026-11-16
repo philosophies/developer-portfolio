@@ -1,0 +1,27 @@
+{
+  "name": "reporting-workbench",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "test": "node --test src/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "build:portfolio": "tsc --noEmit && vite build --mode portfolio --base=/demos/reporting/",
+    "format": "prettier --write src scripts vite.config.ts",
+    "format:check": "prettier --check src scripts vite.config.ts",
+    "test:api": "node scripts/api-smoke.ts"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "prettier": "^3.10.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.8"
+  }
+}

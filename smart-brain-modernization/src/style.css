@@ -1,1 +1,240 @@
-body{margin:0;background:#101b24;color:#e9f0ed;font:18px/1.7 system-ui}main{max-width:760px;margin:60px auto;padding:24px}h1{font-size:48px;line-height:1.15}label,input{display:block}input{box-sizing:border-box;width:100%;padding:16px;margin:12px 0;background:#fff;border:2px solid #8cbbb0;border-radius:8px;font:inherit}button{background:#b9efcb;color:#10241b;border:0;padding:14px 22px;font:inherit;border-radius:8px;cursor:pointer}a{color:#b9efcb}.frame{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#273b4d,#52645c);text-align:center;font-size:12px;padding:0}.frame span{position:absolute;bottom:8px;left:8px}.box{position:absolute;border:3px solid #b9efcb;box-sizing:border-box}
+@font-face {
+  font-family: Plex;
+  src: url('../../site/fonts/IBMPlexSans.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: Rajdhani;
+  src: url('../../site/fonts/Rajdhani-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: #0d131d;
+  color: #edf1f5;
+  font:
+    15px/1.7 Plex,
+    'Segoe UI',
+    sans-serif;
+}
+main {
+  max-width: 860px;
+  margin: auto;
+  padding: 28px 30px;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #344054;
+  padding-bottom: 20px;
+  font-size: 12px;
+}
+header > a {
+  text-decoration: none;
+  color: #d2dfed;
+}
+header > span {
+  font:
+    9px Consolas,
+    monospace;
+  color: #b8a4e7;
+  letter-spacing: 1px;
+}
+.eyebrow {
+  color: #efbd79;
+  font:
+    10px Consolas,
+    monospace;
+  letter-spacing: 2px;
+  margin: 48px 0 20px;
+}
+h1 {
+  font:
+    600 clamp(40px, 5vw, 58px)/1.05 Rajdhani,
+    sans-serif;
+  letter-spacing: -0.6px;
+  margin: 0 0 22px;
+}
+.intro {
+  font-size: 16px;
+  color: #bbc6d6;
+  max-width: 710px;
+}
+aside {
+  background: #1c2333;
+  border-left: 4px solid #b8a4e7;
+  border-radius: 18px 5px 5px 5px;
+  padding: 16px 20px;
+  margin: 25px 0;
+  color: #d6d5e8;
+  font-size: 12px;
+}
+aside strong {
+  color: #f2e9ff;
+}
+form {
+  padding: 25px;
+  background: #141d2a;
+  border: 1px solid #344054;
+  border-radius: 8px;
+  margin: 25px 0;
+}
+label {
+  display: block;
+  color: #afbacb;
+  font-size: 12px;
+}
+input {
+  display: block;
+  width: 100%;
+  background: #0c131e;
+  color: #edf1f5;
+  border: 1px solid #526076;
+  border-radius: 6px;
+  padding: 13px 14px;
+  margin: 9px 0 20px;
+  font:
+    14px Plex,
+    sans-serif;
+  min-height: 46px;
+}
+button {
+  background: #f0be7a;
+  color: #18202c;
+  border: 0;
+  border-radius: 23px 5px 5px 23px;
+  padding: 12px 20px;
+  min-height: 46px;
+  font:
+    600 13px Plex,
+    sans-serif;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+button:hover:not(:disabled) {
+  background: #f8d59e;
+}
+a {
+  color: #a0c6e5;
+  text-underline-offset: 4px;
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #a0c6e5;
+  outline-offset: 4px;
+}
+input:focus {
+  outline: 2px solid #f0be7a;
+  outline-offset: 2px;
+}
+.error {
+  color: #f7bdba;
+  background: #3a2029;
+  border-left: 3px solid #dc9587;
+  border-radius: 4px;
+  padding: 14px 17px;
+  font-size: 13px;
+}
+.frame {
+  position: relative;
+  aspect-ratio: 16/9;
+  background-color: #182437;
+  background-image:
+    linear-gradient(#2d3c4f66 1px, transparent 1px),
+    linear-gradient(90deg, #2d3c4f66 1px, transparent 1px);
+  background-size: 28px 28px;
+  border: 1px solid #3d4b62;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 28px;
+}
+.frame span {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  font:
+    10px Consolas,
+    monospace;
+  letter-spacing: 1px;
+  color: #c0ccdd;
+}
+.box {
+  position: absolute;
+  border: 2px solid #efbd79;
+  border-radius: 3px;
+  background: #efbd7908;
+}
+.box:before {
+  content: 'FIXTURE / 01';
+  position: absolute;
+  left: -2px;
+  top: -23px;
+  font:
+    10px Consolas,
+    monospace;
+  color: #efbd79;
+}
+p[role='status'] {
+  font-size: 12px;
+  color: #b8d7c5;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: baseline;
+  border-top: 1px solid #344054;
+  margin: 35px 0 0;
+  padding: 20px 0;
+  font-size: 11px;
+  color: #9caac0;
+}
+footer p {
+  max-width: 570px;
+  margin: 0;
+}
+footer a {
+  white-space: nowrap;
+}
+@media (max-width: 580px) {
+  main {
+    padding: 22px 20px;
+  }
+  header {
+    display: block;
+  }
+  header > span {
+    display: block;
+    margin-top: 12px;
+  }
+  .eyebrow {
+    margin-top: 34px;
+  }
+  .intro {
+    font-size: 14px;
+  }
+  form {
+    padding: 20px;
+  }
+  .frame span {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+  footer {
+    display: block;
+  }
+  footer a {
+    display: block;
+    margin-top: 14px;
+  }
+}

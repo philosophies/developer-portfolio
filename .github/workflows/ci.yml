@@ -24,8 +24,8 @@ jobs:
           POSTGRES_DB: reporting
         ports: ['5432:5432']
         options: >-
-          --health-cmd "pg_isready -U demo -d reporting"
-          --health-interval 5s --health-timeout 5s --health-retries 10
+          --health-cmd "pg_isready -U demo -d reporting" --health-interval 5s --health-timeout 5s
+          --health-retries 10
     env:
       ConnectionStrings__Reporting: Host=localhost;Database=reporting;Username=demo;Password=local-demo-only
       PGPASSWORD: local-demo-only
@@ -38,8 +38,12 @@ jobs:
           dotnet-version: '10.0.x'
       - run: dotnet restore backend.tests/Reporting.Tests.csproj --locked-mode
       - run: dotnet run --project backend/Reporting.Api.csproj --no-restore -- --migrate
-      - run: dotnet test backend.tests/Reporting.Tests.csproj --no-restore --logger trx --results-directory TestResults
-      - run: dotnet list backend.tests/Reporting.Tests.csproj package --vulnerable --include-transitive --format json > nuget-audit.json
+      - run:
+          dotnet test backend.tests/Reporting.Tests.csproj --no-restore --logger trx
+          --results-directory TestResults
+      - run:
+          dotnet list backend.tests/Reporting.Tests.csproj package --vulnerable --include-transitive
+          --format json > nuget-audit.json
       - run: node scripts/check-nuget.mjs nuget-audit.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
@@ -63,8 +67,13 @@ jobs:
         working-directory: smart-brain-modernization
       - run: npm test && npm run build && npm audit --audit-level=high
         working-directory: smart-brain-modernization
+      - run:
+          npm ci && npm run format:check && npm run typecheck && npm test && npm run build:portfolio
+          && npm audit --audit-level=high
+        working-directory: reporting-ui
       - run: ./automation/Test-AccessReview.ps1
+        shell: pwsh
+      - run: ./automation/Test-GraphSnapshot.ps1
         shell: pwsh
       - run: npm ci && npm run check && npm run build && npm audit --audit-level=high
         working-directory: site
-
