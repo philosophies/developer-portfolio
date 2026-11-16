@@ -1,6 +1,6 @@
 # Microsoft 365 access-review demo
 
-AI-assisted, synthetic-data portfolio demonstration. No tenant connection, real users, credentials, license changes, or permission changes.
+Synthetic-data portfolio demonstration. No tenant connection, real users, credentials, license changes, or permission changes.
 
 Run `./Get-AccessReview.ps1 | ConvertTo-Json` in PowerShell 7. Run `./Test-AccessReview.ps1` for deterministic checks. The report date is explicit so outputs are reproducible. Missing sign-in evidence triggers review rather than an assumption of inactivity. Findings are recommendations for a human reviewer, never actions.
 

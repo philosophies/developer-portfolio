@@ -1,6 +1,6 @@
 # Separate developer portfolio
 
-AI-assisted static portfolio, separate from all existing sites. Source: `index.html` and `style.css`; security headers: `public/_headers`. No trackers, external fonts, API secrets, tenant data or image services.
+Static portfolio, separate from all existing sites. Source: `index.html` and `style.css`; security headers: `public/_headers`. No trackers, external fonts, API secrets, tenant data or image services.
 
 Use Node 24.22.0 or another version supported by the installed cf package. From this directory, run `npm ci` and `npm --prefix ../smart-brain-modernization ci`, then `npm run check` and `npm run build`. The build prepares the shared theme and licensed fonts, builds the sibling React prototype from source and copies generated assets into the static site. Generated assets are ignored by Git. The Cloudflare Vite plugin writes `.cloudflare/output/v0/`. Run `npm run deploy` to deploy that prebuilt production output using cf. No Wrangler configuration is used.
 

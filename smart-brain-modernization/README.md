@@ -2,7 +2,7 @@
 
 Source reviewed: https://github.com/philosophies/Smart-Brain at bd944c2d5baf4729dc5a0274a02c996428ff6cc7. The existing React 16 / react-scripts 1 frontend and Express/Knex backend remain unchanged. The reviewed code uses a local database configuration, open CORS, profile lookup by supplied ID and an image counter updated from a supplied ID without authentication middleware. Vendored API node_modules are tracked. The Clarifai key is a placeholder in the reviewed controller, not a confirmed leaked key.
 
-This is an independently generated, AI-assisted React/Vite migration prototype, not a full replacement or claim of original authorship. No original source is copied. It separates URL validation, normalized bounding boxes and a cancellable detector adapter. The adapter always returns a synthetic box, does not fetch images, and performs no facial recognition. The interface clearly labels this.
+This React/Vite migration prototype covers one focused interaction rather than replacing the full application. No original source is copied. It separates URL validation, normalized bounding boxes and a cancellable detector adapter. The adapter always returns a synthetic box, does not fetch images, and performs no facial recognition. The interface clearly labels this.
 
 Run `npm ci`, `npm test`, `npm run build`, then `npm run dev`. Node 22.18+ required. Tests cover insecure URLs, credentials, malformed geometry, cancellation, and fixture provenance. No API keys or external services are required.
 

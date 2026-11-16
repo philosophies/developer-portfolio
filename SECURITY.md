@@ -1,6 +1,6 @@
 # Security scope
 
-All fixtures are synthetic. Do not add employer scripts, tenant exports, real account information, credentials or face images. The Microsoft 365 demo is report-only. The reporting API is a local unauthenticated read-only demonstration and is not approved for public exposure. Smart-Brain's new adapter is synthetic and does not call an image provider.
+All fixtures are synthetic. Do not add employer scripts, tenant exports, real account information, credentials or face images. The Microsoft 365 demo is report-only. The reporting API requires validated bearer tokens and tenant/owner authorization; it is currently a local demonstration, not a public backend deployment. Production requires a trusted identity provider, managed secrets, least-privilege database access and operational review. Smart-Brain's new adapter is synthetic and does not call an image provider.
 
 Dependency checks and static analysis supplement review; passing them is not a security guarantee. No secrets are required for the static site. GitHub Actions uses read-only contents access except for CodeQL security-result uploads. Pull-request code does not receive deployment credentials. There is no automatic deployment workflow or automatic merge.
 

@@ -7,7 +7,7 @@ Publication was approved on November 12, 2026. Repository: `philosophies/develop
 1. Review the public wording in `site/index.html`, particularly background and attribution. Review and understand each demo before describing personal implementation experience.
 2. Approve repository creation, visibility, and the exact Cloudflare deployment. The owner approved a public repository and separate public static portfolio. Do not publish private review notes, tokens, tenant exports, or the `work/` directory.
 3. GitHub access was refreshed using the existing Git Credential Manager sign-in. Credentials remain in memory and are not committed. Cloudflare CLI account access was verified; reauthenticate if it expires.
-4. Create the new repository and publish this source in one meaningful initial change with AI assistance disclosed. Set the default branch to `main`. Project/source links and case studies are included; the prototype is built from source into the static site.
+4. Create the new repository and publish meaningful changes with an accurate description of scope and validation. Set the default branch to `main`. Project/source links and case studies are included; the prototype is built from source into the static site.
 5. Enable Actions and Dependabot. Run CI, CodeQL and the maintenance workflow manually once. Require passing tests and review before merging. CodeQL requires an eligible public repository or licensed private-repository scanning. The initial CI, CodeQL and maintenance-report runs passed; see DEPLOYMENT.md.
 6. From `site/`, with supported Node installed: `npm ci`, `npm --prefix ../smart-brain-modernization ci`, `npm run check`, `npm run build`, then `npm run deploy`. Use `cf`; do not add a Wrangler configuration. The deployment command uses the prebuilt production output. The only intended new resource is the named static Worker; no custom domain or existing site route is changed.
 7. Verify the returned public URL, desktop/mobile layout, links and security headers. Record the deployment version and actual URL. Cloudflare preview-only build checks are not proof of a live deployment. Roll back using the previous deployment version if needed; leave existing sites alone.
@@ -32,7 +32,7 @@ You can pause all scheduled workflows and return later. There are no contributio
 ## Next development milestones
 
 - SQL Developer: document query plans with a larger synthetic fixture, compare indexes, add reproducible performance evidence. Avoid invented production-scale claims.
-- .NET / backend: add an authenticated test-only write flow with transactional audit records, ownership checks and failure-path tests; then evaluate hosting separately from the static site.
+- .NET / backend: the authenticated record-review workflow, transactional history and failure-path tests are implemented. Next evaluate managed backend hosting and provider sign-in separately from the static site.
 - Internal Tools: implement a read-only Graph adapter in a test tenant, including pagination, throttling and permission documentation. Keep public fixtures synthetic.
 - Smart-Brain: follow the separately reviewed PR sequence in its README. The current prototype does not implement the legacy account flows or real detection.
 
