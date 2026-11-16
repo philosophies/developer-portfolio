@@ -38,4 +38,4 @@ Reviewed November 12, 2026 using GitHub public API inventory, root trees for all
 - Smart-Brain: API root-tree SHA `bd944c2d5baf4729dc5a0274a02c996428ff6cc7`; files: smart-brain-api, smart-brain.
 - Temperature-Convertor: API root-tree SHA `4e4132b6b7e9f6bd75f04553ec86dd4ea5664a40`; files: README.md, index.html, styles.css.
 
-Smart-Brain source commit: `bd944c2d5baf4729dc5a0274a02c996428ff6cc7`. New prototype source is AI-assisted and independently generated; no upstream source was copied. Repository descriptions and visible conventions do not establish who wrote each line. Ask the owner to confirm tutorial origins and retain any applicable credits before reusing legacy source.
+Smart-Brain source commit: `bd944c2d5baf4729dc5a0274a02c996428ff6cc7`. The new prototype is separate from the legacy source; no upstream code was copied. Repository descriptions and visible conventions do not establish who wrote each line. Ask the owner to confirm tutorial origins and retain any applicable credits before reusing legacy source.
