@@ -1,0 +1,12 @@
+**/node_modules/
+**/bin/
+**/obj/
+**/dist/
+**/.cloudflare/
+**/package-lock.json
+**/packages.lock.json
+site/public/theme.css
+site/public/fonts/
+site/public/demos/
+**/fonts/*LICENSE*
+site/public/fonts-licenses.txt
