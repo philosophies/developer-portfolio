@@ -5,6 +5,28 @@ import type { FormEvent } from 'react';
 export const formatAmount = (amount: number) =>
   amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
+export function Feedback({
+  error,
+  message,
+  busy,
+}: {
+  error: string;
+  message: string;
+  busy: boolean;
+}) {
+  return (
+    <>
+      <div role="alert" className={error ? 'feedback error' : 'feedback'}>
+        {error}
+      </div>
+      <div role="status" className="feedback success">
+        {message}
+        {busy ? ' Working…' : ''}
+      </div>
+    </>
+  );
+}
+
 export function Summary({ totals, records }: { totals: Totals[]; records: Entry[] }) {
   return (
     <section className="metrics" aria-label="Report summary">
@@ -148,6 +170,7 @@ export function RecordForm({
           External ID
           <input
             value={input.externalId}
+            autoFocus={!correction}
             readOnly={correction}
             maxLength={100}
             required
@@ -159,6 +182,7 @@ export function RecordForm({
           Department
           <input
             value={input.department}
+            autoFocus={correction}
             maxLength={80}
             required
             onChange={(e) => onInput({ ...input, department: e.target.value })}
@@ -237,11 +261,13 @@ function snapshot(value: string | null): unknown {
     return 'Snapshot could not be read.';
   }
 }
-function AuditHistory({ events }: { events: Audit[] }) {
+function AuditHistory({ events, loading }: { events: Audit[]; loading: boolean }) {
   return (
     <section className="audit">
       <h3>Audit history</h3>
-      {events.length === 0 ? (
+      {loading ? (
+        <p className="muted">Loading history…</p>
+      ) : events.length === 0 ? (
         <p className="muted">
           No events recorded here. Baseline sample states do not invent historical approvals.
         </p>
@@ -277,6 +303,7 @@ type DetailProps = {
   entry: Entry;
   actor: Actor;
   history: Audit[];
+  historyLoading: boolean;
   reason: string;
   busy: boolean;
   onReason: (reason: string) => void;
@@ -288,6 +315,7 @@ export function RecordDetail({
   entry,
   actor,
   history,
+  historyLoading,
   reason,
   busy,
   onReason,
@@ -368,7 +396,7 @@ export function RecordDetail({
           Waiting for another person to review. You cannot approve your own submission.
         </p>
       )}
-      <AuditHistory events={history} />
+      <AuditHistory events={history} loading={historyLoading} />
     </>
   );
 }

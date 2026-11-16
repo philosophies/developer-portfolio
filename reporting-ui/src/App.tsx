@@ -4,7 +4,7 @@ import { Problem, validate, reasonRequired, decodeDisplayActor } from './contrac
 import type { Actor, Audit, Client, Entry, Input, Totals } from './contracts.ts';
 import { HttpClient } from './http.ts';
 import { FixtureClient, fixtureStore } from './fixture.ts';
-import { RecordQueue, RecordForm, RecordDetail, Summary } from './components.tsx';
+import { RecordQueue, RecordForm, RecordDetail, Summary, Feedback } from './components.tsx';
 
 const simulation = import.meta.env.MODE === 'portfolio';
 const blankRecord: Input = {
@@ -54,12 +54,26 @@ export default function App() {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const selectionGeneration = useRef(0);
+  const [historyLoading, setHistoryLoading] = useState(false);
+  const inspectorHeading = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (!selected || creating || editing) return;
+    inspectorHeading.current?.focus({ preventScroll: true });
+    if (window.matchMedia('(max-width: 1000px)').matches) {
+      inspectorHeading.current?.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'start',
+      });
+    }
+  }, [selected?.id, creating, editing]);
 
   useEffect(() => {
     let active = true;
     selectionGeneration.current++;
     setSelected(null);
     setHistory([]);
+    setHistoryLoading(false);
     setCreating(false);
     setEditing(false);
     setError('');
@@ -105,17 +119,22 @@ export default function App() {
     setCreating(false);
     setReason('');
     setHistory([]);
+    setHistoryLoading(false);
     setError('');
+    setHistoryLoading(true);
     const generation = ++selectionGeneration.current;
     try {
       const events = await client.history(entry.id);
       if (generation === selectionGeneration.current) setHistory(events);
     } catch (issue) {
       if (generation === selectionGeneration.current) setError((issue as Error).message);
+    } finally {
+      if (generation === selectionGeneration.current) setHistoryLoading(false);
     }
   }
   async function mutate(action: () => Promise<Entry>, success: string) {
     selectionGeneration.current++;
+    setHistoryLoading(true);
     setBusy(true);
     setError('');
     setMessage('');
@@ -144,6 +163,7 @@ export default function App() {
         }
       }
     } finally {
+      setHistoryLoading(false);
       setBusy(false);
     }
   }
@@ -151,6 +171,7 @@ export default function App() {
     selectionGeneration.current++;
     setSelected(null);
     setHistory([]);
+    setHistoryLoading(false);
     setInput({ ...blankRecord });
     setAmount('');
     setCreating(true);
@@ -210,6 +231,7 @@ export default function App() {
     } catch (issue) {
       setError((issue as Error).message);
     } finally {
+      setHistoryLoading(false);
       setBusy(false);
     }
   }
@@ -219,6 +241,7 @@ export default function App() {
     setError('');
     setSelected(null);
     setHistory([]);
+    setHistoryLoading(false);
     setCreating(false);
     setEditing(false);
     try {
@@ -228,6 +251,7 @@ export default function App() {
     } catch (issue) {
       setError((issue as Error).message);
     } finally {
+      setHistoryLoading(false);
       setBusy(false);
     }
   }
@@ -318,13 +342,9 @@ export default function App() {
           </small>
         </div>
       </section>
-      <div role="alert" className={error ? 'feedback error' : 'feedback'}>
-        {error}
-      </div>
-      <div role="status" className="feedback success">
-        {message}
-        {busy ? ' Working…' : ''}
-      </div>
+      {!selected && !creating && !editing && (
+        <Feedback error={error} message={message} busy={busy} />
+      )}
       <Summary totals={totals} records={records} />
       <div className="workspace">
         <RecordQueue
@@ -339,7 +359,7 @@ export default function App() {
         />
         <section className="panel detail">
           <p className="eyebrow">02 / RECORD INSPECTOR</p>
-          <h2>
+          <h2 ref={inspectorHeading} tabIndex={-1}>
             {creating
               ? 'Create a draft'
               : editing
@@ -348,6 +368,9 @@ export default function App() {
                   ? 'The details'
                   : 'One record at a time.'}
           </h2>
+          {(selected || creating || editing) && (
+            <Feedback error={error} message={message} busy={busy} />
+          )}
           {creating || editing ? (
             <RecordForm
               input={input}
@@ -369,6 +392,7 @@ export default function App() {
               entry={selected}
               actor={actor}
               history={history}
+              historyLoading={historyLoading}
               reason={reason}
               busy={busy}
               onReason={setReason}
