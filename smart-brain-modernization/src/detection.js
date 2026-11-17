@@ -26,11 +26,17 @@ export function boxStyle(box) {
   };
 }
 // Synthetic adapter: never calls Clarifai or fetches a user URL.
-export async function detectFixture(value, { signal } = {}) {
+export async function detectFixture(value, { signal, fixture = 'single' } = {}) {
   validateImageUrl(value);
   if (signal?.aborted) throw new DOMException('Cancelled', 'AbortError');
-  return {
-    source: 'synthetic fixture',
-    boxes: [{ left: 0.3, top: 0.2, right: 0.7, bottom: 0.75 }],
+  const samples = {
+    single: [{ left: 0.3, top: 0.2, right: 0.7, bottom: 0.75 }],
+    pair: [
+      { left: 0.1, top: 0.15, right: 0.4, bottom: 0.7 },
+      { left: 0.6, top: 0.25, right: 0.9, bottom: 0.8 },
+    ],
+    empty: [],
   };
+  if (!Object.hasOwn(samples, fixture)) throw new Error('Choose a supported synthetic sample');
+  return { source: 'synthetic fixture', boxes: samples[fixture] };
 }
