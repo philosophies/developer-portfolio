@@ -28,7 +28,7 @@ project README for implementation limits and setup.
   with bounded retries, validated pagination and pseudonymized output. Live tenant verification
   remains separate.
 - [Smart-Brain migration](smart-brain-modernization/README.md): React/Vite prototype with synthetic
-  detection and four tests. Original app unchanged.
+  sample selection, export, session history and nine tests. Original app unchanged.
 - [Portfolio](site/README.md): static Cloudflare site with four project case studies and the
   synthetic React demo.
 
@@ -38,3 +38,6 @@ See [role evidence and remaining practice](SKILL-EVIDENCE.md),
 https://github.com/philosophies/developer-portfolio. No automated direct pushes or
 activity-generating commits are included. Dependabot proposes real dependency PRs; merges remain
 manual.
+
+[SQL Server exercise and actual plans](sql-server/README.md) · [Walkthrough](docs/WALKTHROUGH.md) ·
+[Practice](practice/README.md)

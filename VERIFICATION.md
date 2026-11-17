@@ -78,3 +78,22 @@ row fingerprints for three tables, approved aggregates, two identity sequences, 
 protection, amount validation, audit foreign keys and tenant/external-ID uniqueness. The drill uses
 real pg_dump/pg_restore and runs in backend CI. It does not recover the application migration ledger
 or establish offsite, point-in-time or production recovery behavior.
+
+## November 17 candidate materials
+
+SQL Server 2022 Developer Edition passed 13 correction/transaction checks locally. Actual plans for
+100,000 synthetic rows returned the same 122216.00 aggregation; reported logical reads changed from
+1860 to 4 after the covering index. The pinned image digest and raw evidence are retained under
+sql-server/evidence. This is local non-production evidence.
+
+Smart-Brain passed nine adapter/session checks. The deferred-response regression failed before
+invalidation was fixed and passed afterward. Browser checks exercised two-box and empty samples,
+result download and session clear. The downloaded JSON identifies the synthetic source and excludes
+the input URL. A 390-pixel phone frame was visually reviewed.
+
+Two one-page role-specific résumés were generated as editable Word documents, rendered with
+LibreOffice and visually inspected, including the final 28150 ZIP correction. Matching PDFs are
+published with explicit owner authorization. Professional experience, portfolio tools and earlier
+self-directed study are separated, and the degree is explicitly in progress. An interactive
+walkthrough and optional practice tasks are prepared; no video recording or completed independent
+practice is claimed.

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SQL Server correction lab — Cody Jones</title>
+    <link rel="stylesheet" href="/theme.css" />
+    <link rel="stylesheet" href="/project.css" />
+  </head>
+  <body>
+    <main class="case-study">
+      <div class="masthead">
+        <a href="/">← Cody Jones / Portfolio</a><span>T-SQL / LOCAL EXECUTION</span>
+      </div>
+      <h1>Correct the record. Keep the history.</h1>
+      <p class="intro">
+        A small SQL Server exercise that makes rollback, stale edits and query plans inspectable.
+      </p>
+      <p>
+        The stored procedure corrects an owned record using a tenant, owner and expected version,
+        then records the old and new amounts in the same transaction. A correction returns the
+        record to draft so it leaves approved totals. This is a standalone synthetic-data exercise,
+        not a second deployed backend.
+      </p>
+      <h2>When the second write fails</h2>
+      <p>
+        A test trigger deliberately rejects an audit insert. The procedure rolls back; both the
+        record amount and its version stay unchanged. Other checks cover stale or missing versions,
+        scoped lookups, invalid amounts, blank reasons and append-only history. All 13 checks passed
+        on SQL Server 2022 Developer Edition.
+      </p>
+      <h2>A plan you can inspect</h2>
+      <p>
+        A separate 100,000-row fixture runs the same aggregation before and after a covering index.
+        Both return 122216.00. The local actual plan changes from a clustered index scan to an index
+        seek; reported logical reads change from 1860 to 4. These are observations from one fixture
+        and run, not a production speedup promise.
+      </p>
+      <p>
+        <a href="https://github.com/philosophies/developer-portfolio/tree/main/sql-server/evidence"
+          >Open actual plans and IO evidence ↗</a
+        >
+      </p>
+      <h2>Scope and identity</h2>
+      <p>
+        The runner starts a disposable non-production container without published ports and cleans
+        it up afterward. Credentials are generated for that run. Procedure parameters do not
+        authenticate a caller; a real application must supply scope from trusted identity. There is
+        no SQL Server HTTP deployment, provider sign-in or concurrent-session test here.
+      </p>
+      <div class="actions">
+        <a
+          class="button"
+          href="https://github.com/philosophies/developer-portfolio/tree/main/sql-server"
+          >Read source and run instructions ↗</a
+        ><a href="/projects/reporting-api/">Related .NET workflow →</a>
+      </div>
+      <p><a href="/projects/sql-analysis/">Earlier SQL exploration and source notes</a></p>
+      <footer>
+        <a href="/">Return to portfolio</a><span>Synthetic data · Actual engine evidence</span>
+      </footer>
+    </main>
+  </body>
+</html>
