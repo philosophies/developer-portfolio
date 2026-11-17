@@ -47,7 +47,8 @@
         <section>
           <h3>What the demo does</h3>
           <p>
-            It validates a URL and returns a fixed synthetic bounding box. It never fetches the
+            It validates a URL and lets you choose one, two or zero synthetic bounding boxes,
+            download a result and inspect the last five completed samples. It never fetches the
             image, recognizes a face, infers an identity or calls Clarifai. The interface labels the
             result clearly.
           </p>
@@ -55,8 +56,9 @@
       </div>
       <h3>Evidence</h3>
       <p>
-        Four tests passed: insecure/credential URL rejection, valid/invalid geometry, synthetic
-        source labeling and cancellation. The React production build succeeded.
+        Nine checks passed: URL and geometry validation, synthetic provenance, bounded history,
+        empty results, clear behavior and stale success/error cancellation. The React production
+        build succeeded.
       </p>
       <h3>Next engineering work</h3>
       <p>

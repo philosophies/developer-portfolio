@@ -1,30 +1,34 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { detectFixture, boxStyle } from './detection.js';
+import { boxStyle } from './detection.js';
+import { createDetectionSession } from './session.js';
 import './style.css';
 function App() {
   const [url, setUrl] = useState('https://example.com/sample.jpg');
-  const [result, setResult] = useState(null),
-    [error, setError] = useState(''),
-    [busy, setBusy] = useState(false);
-  const controller = useRef(null);
-  useEffect(() => () => controller.current?.abort(), []);
-  async function submit(event) {
+  const [fixture, setFixture] = useState('single');
+  const [session] = useState(createDetectionSession);
+  const [{ result, error, busy, history }, setState] = useState(session.snapshot);
+  useEffect(() => {
+    const unsubscribe = session.subscribe(setState);
+    return () => {
+      unsubscribe();
+      session.dispose();
+    };
+  }, [session]);
+  function submit(event) {
     event.preventDefault();
-    controller.current?.abort();
-    const active = new AbortController();
-    controller.current = active;
-    setBusy(true);
-    setError('');
-    setResult(null);
-    try {
-      const data = await detectFixture(url, { signal: active.signal });
-      if (controller.current === active) setResult(data);
-    } catch (e) {
-      if (e.name !== 'AbortError') setError(e.message);
-    } finally {
-      if (controller.current === active) setBusy(false);
-    }
+    void session.run(url, fixture);
+  }
+  function download() {
+    const payload = { schemaVersion: 1, source: 'synthetic fixture', fixture, boxes: result.boxes };
+    const address = URL.createObjectURL(
+      new Blob([JSON.stringify(payload, null, 2) + '\n'], { type: 'application/json' }),
+    );
+    const link = document.createElement('a');
+    link.href = address;
+    link.download = 'synthetic-detection.json';
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(address), 1000);
   }
   return (
     <main>
@@ -52,11 +56,23 @@ function App() {
           value={url}
           onChange={(event) => {
             setUrl(event.target.value);
-            setResult(null);
-            setError('');
+            session.invalidate();
           }}
           required
         />
+        <label htmlFor="fixture">Synthetic sample</label>
+        <select
+          id="fixture"
+          value={fixture}
+          onChange={(event) => {
+            setFixture(event.target.value);
+            session.invalidate();
+          }}
+        >
+          <option value="single">One box</option>
+          <option value="pair">Two boxes</option>
+          <option value="empty">No detections</option>
+        </select>
         <button disabled={busy}>{busy ? 'Checking…' : 'Run synthetic example'}</button>
       </form>
       <p className={error ? 'error' : ''} role="alert">
@@ -71,10 +87,37 @@ function App() {
             ))}
           </div>
           <p role="status">
-            One synthetic bounding box. No identity inferred. No information saved.
+            {result.boxes.length === 0
+              ? 'No synthetic detections.'
+              : `${result.boxes.length} synthetic bounding ${result.boxes.length === 1 ? 'box' : 'boxes'}.`}{' '}
+            No identity inferred. Nothing is sent to a server.
           </p>
+          <button type="button" className="secondary" onClick={download}>
+            Download synthetic result
+          </button>
         </section>
       )}
+      <section className="history" aria-label="Session history">
+        <h2>This session</h2>
+        <p>
+          Last five completed samples, kept only in this tab. URLs are excluded from history and
+          downloads.
+        </p>
+        {history.length ? (
+          <ol>
+            {history.map((item, index) => (
+              <li key={index}>
+                {item.fixture} sample · {item.count} {item.count === 1 ? 'box' : 'boxes'}
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p>No completed samples yet.</p>
+        )}
+        <button type="button" className="secondary" onClick={() => session.clear()}>
+          Clear session
+        </button>
+      </section>
       <footer>
         <p>
           Next: authenticated account flows, database migrations, and a server-only provider
