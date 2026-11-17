@@ -1,0 +1,22 @@
+{
+  "source": "synthetic SQL Server exercise",
+  "engine": "Microsoft SQL Server 2022 (RTM-CU28) (KB5125472) - 16.0.4325.4 (X64) \n\tNov  4 2026 14:09:11 \n\tCopyright (C) 2022 Microsoft Corporation\n\tDeveloper Edition (64-bit) on Linux (Ubuntu 22.04.5 LTS) <X64>",
+  "imageDigests": [
+    "mcr.microsoft.com/mssql/server@sha256:4525e3efac9f3e241cb003bb2ff2a82818b502f37e12049d788b1a9fa7e13b7f"
+  ],
+  "checksPassed": 13,
+  "fixtureRows": 100000,
+  "aggregateTotal": "122216.00",
+  "beforePhysicalOperations": [
+    "Clustered Index Scan",
+    "Compute Scalar",
+    "Stream Aggregate"
+  ],
+  "afterPhysicalOperations": [
+    "Compute Scalar",
+    "Index Seek",
+    "Stream Aggregate"
+  ],
+  "scope": "One local run; no production performance or concurrency claim",
+  "recordedAt": "2026-11-17T08:58:52.579636+00:00"
+}

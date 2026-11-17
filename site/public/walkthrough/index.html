@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Project walkthrough — Cody Jones</title>
+    <link rel="stylesheet" href="/theme.css" />
+    <link rel="stylesheet" href="/project.css" />
+  </head>
+  <body>
+    <main class="case-study">
+      <div class="masthead">
+        <a href="/">← Cody Jones / Portfolio</a><span>FOLLOW THE RECORD</span>
+      </div>
+      <h1>One record, a second set of eyes.</h1>
+      <p class="intro">A short tour of review, correction and the evidence behind the workflow.</p>
+      <p>
+        This is a synthetic browser-memory sample. Persona switching illustrates permissions; it is
+        not real sign-in.
+      </p>
+      <ol>
+        <li>
+          <h2>Open a submission</h2>
+          <p>
+            As Operator, open sample-002. The owner can inspect it but cannot approve their own
+            work.
+          </p>
+        </li>
+        <li>
+          <h2>Review independently</h2>
+          <p>
+            Switch to Independent reviewer, reopen sample-002, enter a reason and approve. The
+            approved total changes from 210.25 to 250.25. Inspect the audit snapshots.
+          </p>
+        </li>
+        <li>
+          <h2>Correct and resubmit</h2>
+          <p>
+            Switch back to Operator and correct the approved record with a reason. It returns to
+            draft and leaves approved totals until reviewed again.
+          </p>
+        </li>
+        <li>
+          <h2>Check the failure path</h2>
+          <p>
+            The local API tests inject an audit-write failure and verify that the record change
+            rolls back too. The public sample does not call that API.
+          </p>
+        </li>
+      </ol>
+      <div class="actions">
+        <a class="button" href="/demos/reporting/">Open the workbench →</a
+        ><a href="https://github.com/philosophies/developer-portfolio/blob/main/docs/WALKTHROUGH.md"
+          >Source and presentation guide ↗</a
+        >
+      </div>
+      <h2>Inspect the SQL</h2>
+      <p>
+        The separate SQL Server exercise includes a correction procedure, 13 checks, rollback and
+        actual plans for a 100,000-row fixture. It is local non-production evidence.
+      </p>
+      <p>
+        <a href="https://github.com/philosophies/developer-portfolio/tree/main/sql-server"
+          >SQL Server exercise and plans ↗</a
+        >
+      </p>
+      <footer>
+        <a href="/">Return to portfolio</a><span>Synthetic records · Inspectable decisions</span>
+      </footer>
+    </main>
+  </body>
+</html>

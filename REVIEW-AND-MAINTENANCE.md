@@ -60,8 +60,9 @@ or expected weekly hours.
 
 ## Next development milestones
 
-- SQL Developer: a 100,000-row synthetic query-plan/index study is implemented. Next execute
-  equivalent T-SQL examples on SQL Server; PostgreSQL results do not establish SQL Server behavior.
+- SQL Developer: a 100,000-row synthetic query-plan/index study is implemented. A standalone SQL
+  Server correction exercise now has 13 checks and actual plan evidence. Production SQL Server
+  experience remains a separate claim.
 - .NET / backend: the authenticated record-review workflow, transactional history and failure-path
   tests are implemented. Next evaluate managed backend hosting and provider sign-in separately from
   the static site. A disposable logical recovery drill is implemented; production grants, offsite

@@ -777,3 +777,12 @@ footer span:first-child {
 .project-links a {
   line-height: 1.8;
 }
+
+.contact {
+  margin: 40px auto;
+  max-width: 1000px;
+  padding: 24px;
+}
+.contact a {
+  text-underline-offset: 4px;
+}

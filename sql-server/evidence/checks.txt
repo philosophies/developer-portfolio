@@ -1,0 +1,13 @@
+PASS correction returns to draft and advances version
+PASS audit preserves correction amounts
+PASS corrected amount leaves approved totals
+PASS stale versions rejected
+PASS missing version rejected
+PASS tenant boundary
+PASS owner boundary
+PASS negative amount rejected
+PASS blank reason rejected
+PASS pending submission protected
+PASS audit failure rolls back both writes
+PASS append-only audit
+PASS no leaked transactions
